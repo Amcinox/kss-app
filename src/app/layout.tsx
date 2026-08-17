@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s｜KOBI SOCCER SCHOOL",
   },
   description:
-    "兵庫県淡路市のサッカースクール。自分で観て、考えて、挑戦できる選手へ。ゲームの中で技術・判断力・創造性を育てます。体験練習受付中。",
+    "兵庫県淡路市のサッカースクール。自分で観て、考えて、挑戦できる選手へ。ゲームの中で技術・判断力・創造性を育てます。初回無料の体験練習を受付中。",
   keywords: [
     "KOBI SOCCER SCHOOL",
     "淡路島 サッカースクール",
