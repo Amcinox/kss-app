@@ -1,4 +1,4 @@
-export type Lang = "en" | "ja";
+export type Lang = "ja" | "en";
 
 export type Pillar = { num: string; t: string; d: string };
 export type Stat = { n: string; l: string };
@@ -42,6 +42,7 @@ export type Copy = {
   classes: ClassItem[];
   scheduleTitle: string;
   schedule: ScheduleRow[];
+  scheduleNote: string;
   locationsTitle: string;
   locations: Ground[];
   trialCtaTitle: string;
@@ -75,6 +76,11 @@ export type Copy = {
   readMore: string;
 };
 
+/**
+ * TODO — placeholders. The brief lists the official LINE URL / QR code and the
+ * Instagram URL among the items Kobi must supply before launch; these came from
+ * the original mock-up and have not been verified.
+ */
 export const LINE_URL = "https://line.me/R/ti/p/@kobisoccer";
 export const LINE_HANDLE = "@kobisoccer";
 export const INSTAGRAM_URL = "https://instagram.com/kobi.soccer.school";
@@ -90,458 +96,539 @@ export const NAV_ROUTES = [
 ] as const;
 
 export const COPY: Record<Lang, Copy> = {
-  en: {
-    nav: ["Home", "Classes", "Coach", "Gallery", "Contact"],
-    langLabel: "日本語",
-    heroKicker: "Kobe · Hyogo · Ages 4–14",
-    heroTitle1: "Build the player.",
-    heroTitle2: "Build the person.",
+  ja: {
+    nav: ["ホーム", "クラス・料金", "コーチ", "ギャラリー", "お問い合わせ"],
+    langLabel: "EN",
+    heroKicker: "兵庫・淡路島 ／ 個を伸ばすサッカースクール",
+    heroTitle1: "自分で観て、考えて、",
+    heroTitle2: "挑戦できる選手へ。",
     heroSub:
-      "Kobi Soccer School is a small-group academy led by a Moroccan coach who trains children in Japan with a European technical method — real repetitions, real decisions, and a standard of behaviour we never lower.",
-    ctaTrial: "Book a trial",
-    ctaClasses: "See classes",
-    kickHint: "Click anywhere — the ball reacts",
+      "KOBI SOCCER SCHOOL は、子ども一人ひとりの技術・判断力・創造性を育てるサッカースクールです。答えを上から与えるだけではなく、ゲームの中で観て、考え、決めて、挑戦する経験を大切にしています。",
+    ctaTrial: "体験を申し込む",
+    ctaClasses: "スケジュールを見る",
+    kickHint: "画面をタップするとボールが動きます",
     marquee:
-      "TECHNIQUE · DECISION MAKING · CHARACTER · SMALL GROUPS · EVERY CHILD TOUCHES THE BALL ·",
-    pillarsKicker: "Coaching philosophy",
-    pillarsTitle: "Three things every session must deliver",
+      "観る ・ 理解する ・ 決める ・ 実行する ・ 適応する ・ 挑戦する ・",
+    pillarsKicker: "指導理念",
+    pillarsTitle: "自分で答えを見つけるための6つのステップ",
     pillars: [
       {
         num: "01",
-        t: "Technique first",
-        d: "Every session starts with the ball at the feet. Control, first touch, both feet — the fundamentals a player carries for life, drilled until they are automatic.",
+        t: "観る",
+        d: "ボール、味方、相手、スペース、ゴール、プレッシャー。まず、まわりで何が起きているかを見ることから始めます。",
       },
       {
         num: "02",
-        t: "Decision making",
-        d: "Small-sided games where children must look, choose and act under pressure. We coach the question, not the answer, so players learn to read the game themselves.",
+        t: "理解する",
+        d: "その状況が何を求めているのか、どんな選択肢があるのかを掴む。見えたものの意味を考えます。",
       },
       {
         num: "03",
-        t: "Character",
-        d: "Punctuality, respect for teammates and opponents, effort when tired. Parents tell us this is what they notice first at home.",
-      },
-    ],
-    stats: [
-      { n: "8", l: "Max per group" },
-      { n: "4–14", l: "Ages coached" },
-      { n: "60+", l: "Players trained" },
-      { n: "2", l: "Training grounds" },
-    ],
-    classesKicker: "Programmes",
-    classesTitle: "Classes & Prices",
-    classesIntro:
-      "Four ways to train with us. Every new family starts with a trial session so the child — and the parents — can see how we work before committing to anything.",
-    seeAll: "All classes",
-    classes: [
-      {
-        name: "Regular group training",
-        short: "Weekly small-group sessions, split by age.",
-        price: "¥8,000 / month",
-        long: "Two sessions a week in groups of up to eight, split U-8 / U-12 / U-14. A progressive curriculum across the term: ball mastery, passing patterns, one-v-one, and small-sided games. Monthly report to parents.",
-        tags: ["90 min", "2× / week", "Ages 4–14"],
-      },
-      {
-        name: "Special training",
-        short: "Focused clinics on one theme.",
-        price: "¥4,000 / session",
-        long: "Saturday clinics that go deep on a single theme — finishing, defending one-v-one, goalkeeping, or speed and agility. Open to our players and to children from other clubs.",
-        tags: ["120 min", "Saturdays", "Open to all clubs"],
-      },
-      {
-        name: "Individual 1-on-1",
-        short: "Private coaching, fully personalised.",
-        price: "¥6,500 / hour",
-        long: "One coach, one player. We assess, agree a target with the family, and build a personal plan — for children who want to catch up, or to pull ahead of their team level. Video feedback included.",
-        tags: ["60 min", "By booking", "Video feedback"],
-      },
-      {
-        name: "Trial session",
-        short: "Come and try before you decide.",
-        price: "¥1,000 first time",
-        long: "A full regular session at trial price, with a short conversation with the coach afterwards about what we saw and what your child needs. No obligation to join.",
-        tags: ["90 min", "Once per child", "No obligation"],
-      },
-    ],
-    scheduleTitle: "Weekly schedule",
-    schedule: [
-      {
-        day: "Tuesday",
-        time: "17:00 – 18:30",
-        group: "U-8 group",
-        place: "Nada Futsal Park",
-      },
-      {
-        day: "Tuesday",
-        time: "18:45 – 20:15",
-        group: "U-12 / U-14 group",
-        place: "Nada Futsal Park",
-      },
-      {
-        day: "Thursday",
-        time: "17:00 – 18:30",
-        group: "U-8 group",
-        place: "Higashinada Ground",
-      },
-      {
-        day: "Thursday",
-        time: "18:45 – 20:15",
-        group: "U-12 / U-14 group",
-        place: "Higashinada Ground",
-      },
-      {
-        day: "Saturday",
-        time: "09:00 – 11:00",
-        group: "Special training clinic",
-        place: "Nada Futsal Park",
-      },
-      {
-        day: "Sunday",
-        time: "By booking",
-        group: "Individual 1-on-1",
-        place: "Either ground",
-      },
-    ],
-    locationsTitle: "Where we train",
-    locations: [
-      {
-        name: "Nada Futsal Park",
-        addr: "2-14 Mizukasa-dori, Nada-ku, Kobe, Hyogo",
-        access: "8 min walk from JR Rokkomichi · Parking for 20 cars",
-      },
-      {
-        name: "Higashinada Sports Ground",
-        addr: "1-3 Uozaki-hamamachi, Higashinada-ku, Kobe, Hyogo",
-        access: "12 min walk from Hanshin Uozaki · Covered pitch",
-      },
-    ],
-    trialCtaTitle: "Not sure which class fits?",
-    trialCtaSub:
-      "Message us on LINE with your child's age — we will recommend one.",
-    coachKicker: "The coach",
-    coachName: 'Coach Yassine "Kobi" Amrani',
-    coachIntro:
-      "Born in Casablanca, trained in a Moroccan academy, coaching children in Kobe since 2019. He runs every session himself — parents always know who is coaching their child.",
-    coachBio1:
-      "Yassine grew up in a Casablanca academy where technical repetition came before anything else, and played at regional level before an injury ended his playing career at 22. He moved to Japan in 2018, coached at two clubs in Hyogo, and founded Kobi Soccer School to teach the way he was taught: patiently, with the ball, and with high expectations of behaviour.",
-    coachBio2:
-      "He coaches in Japanese, English, French and Arabic, holds a JFA C licence, and is certified in first aid. Every player gets his phone number for their parents — questions are answered the same week.",
-    coachQuote:
-      '"A child who is not touching the ball is not training. That is the whole method."',
-    philosophyTitle: "How we work",
-    philosophy: [
-      {
-        num: "01",
-        t: "Small groups only",
-        d: "Eight players maximum, so the coach can correct every child by name, every session.",
-      },
-      {
-        num: "02",
-        t: "The ball is the teacher",
-        d: "Almost no queuing, almost no laps. Fitness comes from the game itself.",
-      },
-      {
-        num: "03",
-        t: "Parents are informed",
-        d: "A short written note each month on what your child improved and what we work on next.",
+        t: "決める",
+        d: "コーチの指示を待つのではなく、自分でプレーを選ぶ。判断する回数が、選手を伸ばします。",
       },
       {
         num: "04",
-        t: "Safety is not optional",
-        d: "Insured sessions, first-aid trained coach, clear rules on heat, hydration and rest.",
-      },
-    ],
-    pathTitle: "Background",
-    timeline: [
-      {
-        year: "2008–2014",
-        text: "Youth academy and regional-level football in Casablanca, Morocco.",
+        t: "実行する",
+        d: "選んだプレーを、適切な技術・質・タイミングで実行する。ここで技術が意味を持ちます。",
       },
       {
-        year: "2018",
-        text: "Moved to Japan; began coaching youth football in Hyogo prefecture.",
+        num: "05",
+        t: "適応する",
+        d: "相手、スペース、スピード、新しい情報。変わり続ける状況に合わせて、次の一手を変えていきます。",
       },
       {
-        year: "2019",
-        text: "Founded Kobi Soccer School with one group of six children.",
-      },
-      {
-        year: "2022",
-        text: "Obtained JFA C coaching licence; added individual and clinic programmes.",
-      },
-      {
-        year: "Today",
-        text: "Two grounds, six weekly groups, and over sixty players trained.",
-      },
-    ],
-    galleryKicker: "Inside a session",
-    galleryTitle: "Training gallery",
-    galleryIntro:
-      "Photos from regular sessions in Kobe. No staged shots — this is what a Tuesday evening actually looks like.",
-    gallery: [
-      {
-        src: "/uploads/training-1.jpg",
-        cap: "Session briefing before small-sided games",
-      },
-      { src: "/uploads/training-2.jpg", cap: "End of a 1-on-1 session" },
-      { src: "/uploads/training-4.jpg", cap: "Match ball, Higashinada ground" },
-      { src: "/uploads/coach.jpg", cap: "Coach Yassine at the covered pitch" },
-    ],
-    contactKicker: "Get in touch",
-    contactTitle: "Contact us",
-    contactIntro:
-      "The fastest way to reach us is LINE — we usually reply the same day. Tell us your child's age and which class you are interested in, and we will arrange a trial.",
-    lineCta: "Message on LINE",
-    igCta: "Follow on Instagram",
-    faqTitle: "Questions parents ask",
-    faqs: [
-      {
-        q: "My child has never played football. Is that ok?",
-        a: "Yes — about half of our beginners have never played. The U-8 group in particular is built for first-time players, and the coach adapts the drills so nobody is left behind.",
-      },
-      {
-        q: "What should my child bring?",
-        a: "Football boots or trainers, shin pads, a water bottle, and a change of shirt. We provide balls, bibs and cones.",
-      },
-      {
-        q: "What language is used in training?",
-        a: "Mostly Japanese, with English used naturally alongside it. The coach also speaks French and Arabic.",
-      },
-      {
-        q: "Can we pay monthly and cancel any time?",
-        a: "Yes. Monthly fees are paid at the start of each month and you can stop with two weeks' notice — no annual contract.",
-      },
-      {
-        q: "What happens when it rains?",
-        a: "Higashinada is a covered pitch, so most sessions go ahead. If a session is cancelled we notify parents on LINE and add a make-up session.",
-      },
-    ],
-    footerBlurb:
-      "Small-group football coaching for children in Kobe. Technique, decisions, character.",
-    navLabel: "Pages",
-    menuLabel: "Menu",
-    contactLabel: "Contact",
-    footerCity: "Nada-ku & Higashinada-ku, Kobe",
-    readMore: "About the coach",
-  },
-
-  ja: {
-    nav: ["ホーム", "クラス", "コーチ", "ギャラリー", "お問い合わせ"],
-    langLabel: "EN",
-    heroKicker: "神戸・兵庫 ／ 4〜14歳",
-    heroTitle1: "選手を育てる。",
-    heroTitle2: "人を育てる。",
-    heroSub:
-      "Kobi Soccer School は、モロッコ出身のコーチが指導する少人数制サッカースクールです。ヨーロッパの技術指導をベースに、ボールに触る回数、自分で判断する経験、そして礼儀を大切にしています。",
-    ctaTrial: "体験を申し込む",
-    ctaClasses: "クラスを見る",
-    kickHint: "画面をクリックするとボールが動きます",
-    marquee: "技術 ・ 判断力 ・ 人間性 ・ 少人数制 ・ 全員がボールに触れる ・",
-    pillarsKicker: "指導方針",
-    pillarsTitle: "毎回の練習で必ず届ける3つのこと",
-    pillars: [
-      {
-        num: "01",
-        t: "まず技術",
-        d: "練習は必ずボールを足元に置くところから。トラップ、ファーストタッチ、両足の使い分け。一生使える基礎を、体が覚えるまで繰り返します。",
-      },
-      {
-        num: "02",
-        t: "判断力",
-        d: "少人数のゲーム形式で、見て、選んで、動く。答えではなく問いを与える指導で、自分で試合を読める選手に育てます。",
-      },
-      {
-        num: "03",
-        t: "人間性",
-        d: "時間を守る、仲間と相手を尊重する、疲れても最後まで走る。保護者の方が最初に気づくのはここだと言われます。",
+        num: "06",
+        t: "挑戦する",
+        d: "挑戦し、失敗し、学び、もう一度挑戦する。その勇気こそ、いちばん伸ばしたい力です。",
       },
     ],
     stats: [
-      { n: "8", l: "1グループ最大人数" },
-      { n: "4–14", l: "対象年齢" },
-      { n: "60+", l: "指導した選手数" },
-      { n: "2", l: "練習グラウンド" },
+      { n: "70%", l: "ゲーム形式の練習" },
+      { n: "90", l: "分 ／ 1回の練習" },
+      { n: "3", l: "曜日 ／ 週" },
+      { n: "2", l: "練習会場" },
     ],
-    classesKicker: "プログラム",
-    classesTitle: "クラスと料金",
+    classesKicker: "クラスと料金",
+    classesTitle: "クラス・料金",
     classesIntro:
-      "4つのクラスをご用意しています。入会前に必ず体験練習を受けていただき、お子様と保護者の方に指導内容を見ていただいてから決めていただきます。",
-    seeAll: "すべてのクラス",
+      "参加は1回ごとのお支払い、またはお得な回数券をご利用いただけます。マンツーマンの個人レッスンもご用意しています。まずは体験練習からお越しください。",
+    seeAll: "クラスを見る",
     classes: [
       {
-        name: "レギュラーグループ",
-        short: "年齢別・少人数の週2回コース",
-        price: "月額 ¥8,000",
-        long: "最大8名のグループで週2回。U-8／U-12／U-14に分かれ、ボールマスタリー、パス、1対1、ゲームへと段階的に進みます。毎月、保護者の方へレポートをお渡しします。",
-        tags: ["90分", "週2回", "4〜14歳"],
+        name: "レギュラークラス",
+        short: "月・水・金の通常練習",
+        price: "1回 ¥1,000",
+        long: "月曜・水曜・金曜に行う通常のクラスです。少人数ゲームや対人を中心に、必要に応じて基礎技術も丁寧に確認します。所属チームがあるお子様も参加できます。",
+        tags: ["90分", "月・水・金", "チーム所属可"],
       },
       {
-        name: "特別練習",
-        short: "テーマを絞った土曜クリニック",
-        price: "1回 ¥4,000",
-        long: "シュート、1対1の守備、ゴールキーパー、スピードとアジリティなど、テーマを1つに絞った土曜クリニック。他クラブの選手も参加できます。",
-        tags: ["120分", "土曜日", "他クラブ可"],
+        name: "回数券",
+        short: "11回分をまとめてお得に",
+        price: "11回 ¥10,000",
+        long: "11回分の回数券です。1回あたり約¥909となり、通常参加よりお得にご利用いただけます。ご利用方法はLINEでご案内します。",
+        tags: ["11回分", "1回あたり約¥909", "レギュラークラス用"],
       },
       {
-        name: "個人レッスン（1対1）",
-        short: "完全個別・目標に合わせた指導",
-        price: "60分 ¥6,500",
-        long: "コーチ1名に選手1名。現状を評価し、ご家庭と目標を決めて個別プランを作成します。追いつきたいお子様にも、さらに伸ばしたいお子様にも。動画フィードバック付き。",
-        tags: ["60分", "予約制", "動画付き"],
+        name: "個人レッスン",
+        short: "マンツーマンで課題に集中",
+        price: "60分 ¥5,000",
+        long: "コーチ1名に選手1名。今の課題をご家庭と一緒に確認し、そのお子様に必要なテーマへ集中して取り組みます。ご希望の日程はご相談ください。",
+        tags: ["60分", "予約制", "個別対応"],
       },
       {
         name: "体験練習",
         short: "まずは一度、参加してみてください",
-        price: "初回 ¥1,000",
-        long: "通常のレギュラー練習に体験価格で参加できます。練習後にコーチから、見えた良い点と課題を直接お話しします。入会の義務はありません。",
-        tags: ["90分", "お一人1回", "入会義務なし"],
+        price: "お問い合わせください",
+        long: "通常のクラスにそのまま参加していただけます。練習後にコーチから、お子様の様子と次に伸ばしたい点を直接お話しします。LINEからお申し込みください。",
+        tags: ["通常クラスに参加", "LINEで申込", "入会義務なし"],
       },
     ],
     scheduleTitle: "週間スケジュール",
     schedule: [
       {
-        day: "火曜",
+        day: "月曜",
         time: "17:00 – 18:30",
-        group: "U-8 グループ",
-        place: "灘フットサルパーク",
+        group: "レギュラークラス",
+        place: "会場はお問い合わせください",
       },
       {
-        day: "火曜",
-        time: "18:45 – 20:15",
-        group: "U-12 / U-14 グループ",
-        place: "灘フットサルパーク",
+        day: "月曜",
+        time: "18:30 – 20:00",
+        group: "レギュラークラス",
+        place: "会場はお問い合わせください",
       },
       {
-        day: "木曜",
+        day: "水曜",
+        time: "17:00 – 18:00",
+        group: "小学1年生クラス（開講時）",
+        place: "佐野 屋内運動施設",
+      },
+      {
+        day: "水曜",
         time: "17:00 – 18:30",
-        group: "U-8 グループ",
-        place: "東灘グラウンド",
+        group: "レギュラークラス",
+        place: "会場はお問い合わせください",
       },
       {
-        day: "木曜",
-        time: "18:45 – 20:15",
-        group: "U-12 / U-14 グループ",
-        place: "東灘グラウンド",
+        day: "水曜",
+        time: "18:30 – 20:00",
+        group: "レギュラークラス",
+        place: "会場はお問い合わせください",
       },
       {
-        day: "土曜",
-        time: "09:00 – 11:00",
-        group: "特別練習クリニック",
-        place: "灘フットサルパーク",
+        day: "金曜",
+        time: "17:00 – 18:30",
+        group: "レギュラークラス",
+        place: "会場はお問い合わせください",
       },
       {
-        day: "日曜",
-        time: "予約制",
-        group: "個人レッスン",
-        place: "いずれかの会場",
+        day: "金曜",
+        time: "18:30 – 20:00",
+        group: "レギュラークラス",
+        place: "会場はお問い合わせください",
       },
     ],
+    scheduleNote:
+      "スケジュールと会場は変更になる場合があります。最新の情報と当日の会場は、LINEにてご確認ください。",
     locationsTitle: "練習会場",
     locations: [
       {
-        name: "灘フットサルパーク",
-        addr: "兵庫県神戸市灘区水笠通2-14",
-        access: "JR六甲道より徒歩8分 ／ 駐車場20台",
+        name: "佐野 屋内運動施設",
+        addr: "兵庫県淡路市佐野（詳細住所は準備中）",
+        access: "屋内施設のため、天候の影響を受けにくい会場です",
       },
       {
-        name: "東灘スポーツグラウンド",
-        addr: "兵庫県神戸市東灘区魚崎浜町1-3",
-        access: "阪神魚崎より徒歩12分 ／ 屋根付きピッチ",
+        name: "淡路市役所 フットサル場",
+        addr: "兵庫県淡路市（詳細住所は準備中）",
+        access: "アクセス・駐車場のご案内は準備中です",
       },
     ],
     trialCtaTitle: "どのクラスか迷われたら",
     trialCtaSub:
-      "LINEでお子様の年齢をお送りください。おすすめをご案内します。",
+      "LINEでお子様の学年をお知らせください。おすすめのクラスをご案内します。",
     coachKicker: "コーチ紹介",
-    coachName: "ヤシン「Kobi」アムラニ",
+    coachName: "「Kobi」シャリフ・アブデルカビル",
     coachIntro:
-      "モロッコ・カサブランカ出身。現地アカデミーで育ち、2019年から神戸で子どもたちを指導しています。すべての練習を本人が担当します。",
+      "モロッコ出身。2024年5月に淡路島で KOBI SOCCER SCHOOL を立ち上げ、すべての練習を自身で担当しています。",
     coachBio1:
-      "カサブランカのアカデミーで、何よりも技術の反復を重視する環境で育ち、地域リーグでプレー。22歳のとき怪我で選手生活を終えました。2018年に来日し、兵庫県内の2クラブで指導した後、自分が教わったやり方 — 根気強く、ボールとともに、そして規律を持って — を伝えるために Kobi Soccer School を設立しました。",
+      "モロッコで育ち、日本で指導者としてのキャリアを重ねてきました。スポーツアカデミーで Head of Soccer を務め、中学校サッカーの指導も経験しています。2024年5月、淡路島で KOBI SOCCER SCHOOL を開校しました。",
     coachBio2:
-      "日本語・英語・フランス語・アラビア語で指導。JFA C級コーチライセンス、救急救命講習修了。保護者の方には連絡先をお渡しし、ご質問には必ずその週のうちにお答えします。",
-    coachQuote: "「ボールに触っていない時間は、練習ではない。」",
-    philosophyTitle: "スクールの約束",
+      "JFA B級コーチライセンス、PFSA Opposition Analysis レベル1・2、FIFA セーフガーディングを修了。学び続けながら、将来的には JFA A級ライセンスの取得と、さらに高いレベルでの指導を目指しています。",
+    coachQuote: "「どうやるか」の前に、「いつ、なぜ、それを使うのか」。",
+    philosophyTitle: "スクールの考え方",
     philosophy: [
       {
         num: "01",
-        t: "少人数制のみ",
-        d: "最大8名。毎回、全員の名前を呼んで指導し、修正します。",
+        t: "個を先に",
+        d: "早い段階でポジションを固定しません。受ける、運ぶ、パス、ドリブル、シュート、守備、切り替え。どの役割でも通用する力を育てます。",
       },
       {
         num: "02",
-        t: "ボールが先生",
-        d: "並んで待つ時間、走るだけの時間はほとんどありません。体力はゲームの中で身につきます。",
+        t: "ゲームの中で学ぶ",
+        d: "練習のおよそ7割は少人数ゲーム、ロンド、数的優位、切り替えなど。残りの3割で基礎技術やコーディネーションを丁寧に確認します。",
       },
       {
         num: "03",
-        t: "保護者への報告",
-        d: "毎月、成長した点と次の課題を短いレポートでお伝えします。",
+        t: "問いかける指導",
+        d: "答えを先に渡さず、質問で気づきを促します。必要なときははっきり修正し、そのあと判断を選手に返します。",
       },
       {
         num: "04",
-        t: "安全が最優先",
-        d: "保険加入済み、救命講習修了コーチ。暑さ・水分・休憩について明確なルールを設けています。",
+        t: "失敗できる場所",
+        d: "ミスは選手とコーチにとっての情報です。結果だけでなく、観察・勇気ある判断・良いタイミング・努力を評価します。",
       },
     ],
-    pathTitle: "経歴",
+    pathTitle: "経歴と資格",
     timeline: [
       {
-        year: "2008–2014",
-        text: "モロッコ・カサブランカのユースアカデミー、地域リーグでプレー。",
+        year: "2024.05",
+        text: "淡路島で KOBI SOCCER SCHOOL を開校。すべての練習をコーチ本人が担当しています。",
       },
-      { year: "2018", text: "来日。兵庫県内で少年サッカーの指導を開始。" },
-      { year: "2019", text: "6名の子どもたちと Kobi Soccer School を設立。" },
       {
-        year: "2022",
-        text: "JFA C級ライセンス取得。個人レッスンとクリニックを開始。",
+        year: "指導歴",
+        text: "スポーツアカデミーでの Head of Soccer、中学校サッカーの指導を経験。",
       },
-      { year: "現在", text: "2会場・週6グループ、これまでに60名以上を指導。" },
+      {
+        year: "資格",
+        text: "JFA B級コーチライセンス ／ PFSA Opposition Analysis レベル1・2 ／ FIFA セーフガーディング修了。",
+      },
+      {
+        year: "これから",
+        text: "JFA A級ライセンスの取得と、さらに高いレベルでの指導を目指しています。",
+      },
     ],
     galleryKicker: "練習風景",
     galleryTitle: "ギャラリー",
     galleryIntro:
-      "神戸での通常練習の写真です。演出はありません。火曜の夕方、実際にこうして練習しています。",
+      "淡路島での実際の練習の写真です。演出はありません。子どもたちが自分で観て、考えて、挑戦している時間です。",
     gallery: [
-      { src: "/uploads/training-1.jpg", cap: "ゲーム前のミーティング" },
-      { src: "/uploads/training-2.jpg", cap: "個人レッスンの終わりに" },
-      { src: "/uploads/training-4.jpg", cap: "試合球 ／ 東灘グラウンド" },
-      { src: "/uploads/coach.jpg", cap: "屋根付きピッチにて" },
+      { src: "/uploads/team-group-photo.jpg", cap: "スクール全員での集合写真" },
+      {
+        src: "/uploads/training-cone-dribbling.jpg",
+        cap: "コーンを使ったドリブル練習",
+      },
+      {
+        src: "/uploads/coach-with-players.jpg",
+        cap: "練習のあとに、コーチと一緒に",
+      },
+      { src: "/uploads/coach-portrait.jpg", cap: "コーチ Kobi" },
     ],
     contactKicker: "お問い合わせ",
     contactTitle: "ご連絡ください",
     contactIntro:
-      "一番早いのは LINE です。通常は当日中にお返事します。お子様の年齢とご希望のクラスをお知らせいただければ、体験練習をご案内します。",
-    lineCta: "LINEで相談する",
+      "一番早いのは LINE です。お子様の学年と、ご希望の曜日やクラスをお知らせください。体験練習をご案内します。",
+    lineCta: "LINEで問い合わせる",
     igCta: "Instagramを見る",
     faqTitle: "よくあるご質問",
     faqs: [
       {
-        q: "サッカーは初めてでも大丈夫ですか？",
-        a: "はい。初心者の割合はおよそ半分です。特にU-8グループは初めてのお子様を前提に構成しており、コーチが一人ひとりに合わせて内容を調整します。",
+        q: "サッカーは初めてでも参加できますか？",
+        a: "はい。年齢やレベルに合わせて、ルール・スペース・人数・難易度を調整します。まずはボールに触れる回数を増やし、できた、という経験を積むところから始めます。",
+      },
+      {
+        q: "他のチームに所属していても参加できますか？",
+        a: "はい。KOBI はチームの活動と両立できるスクールです。チームでは「チームのためのプレー」を学び、KOBI では個人の技術・判断力・創造性を伸ばします。",
       },
       {
         q: "持ち物は何が必要ですか？",
-        a: "シューズ（スパイクまたは運動靴）、すね当て、水筒、着替えのシャツ。ボール・ビブス・コーンはスクールで用意します。",
-      },
-      {
-        q: "練習は何語で行われますか？",
-        a: "基本は日本語で、英語も自然に交えて指導します。コーチはフランス語とアラビア語も話します。",
-      },
-      {
-        q: "月謝制ですか？途中でやめられますか？",
-        a: "月謝は毎月初めのお支払いで、2週間前のご連絡で退会できます。年間契約はありません。",
+        a: "動きやすい服装、シューズ、すね当て、飲みもの、着替えをお持ちください。ご不明な点は、LINEでお気軽にお尋ねください。",
       },
       {
         q: "雨の日はどうなりますか？",
-        a: "東灘グラウンドは屋根付きのため、多くの場合は実施します。中止の場合はLINEでご連絡し、振替練習を設定します。",
+        a: "屋内施設で行うクラスは天候の影響を受けにくく、多くの場合はそのまま実施します。中止や会場の変更がある場合は、LINEでご連絡します。",
+      },
+      {
+        q: "お支払いはどうなりますか？",
+        a: "通常参加は1回 ¥1,000 です。11回分 ¥10,000 の回数券もご利用いただけます。個人レッスンは60分 ¥5,000 です。",
+      },
+      {
+        q: "体験はどう申し込めばいいですか？",
+        a: "LINEからご連絡ください。お子様の学年とご希望の曜日をお知らせいただければ、空き状況と当日のご案内をお送りします。",
+      },
+      {
+        q: "クラスは年齢やレベルで分かれていますか？",
+        a: "時間帯によってクラスを分けています。水曜日には小学1年生向けのクラスもあります（開講時）。詳しくは週間スケジュールをご覧ください。",
+      },
+      {
+        q: "チームとの違いは何ですか？",
+        a: "チームは「チームのために戦う力」を育てます。KOBI SOCCER SCHOOL は「一人の選手として上手くなる力」を育てます。どちらかを選ぶ必要はなく、両立できます。",
       },
     ],
-    footerBlurb: "神戸の少人数制サッカースクール。技術・判断力・人間性。",
+    footerBlurb:
+      "淡路島のサッカースクール。観る・考える・決める・挑戦する。個を伸ばす指導を行っています。",
     navLabel: "ページ",
     menuLabel: "メニュー",
     contactLabel: "連絡先",
-    footerCity: "神戸市灘区・東灘区",
+    footerCity: "兵庫県淡路市",
     readMore: "コーチについて",
+  },
+
+  en: {
+    nav: ["Home", "Classes & Fees", "Coach", "Gallery", "Contact"],
+    langLabel: "日本語",
+    heroKicker: "Awaji Island · Hyogo · Individual development",
+    heroTitle1: "Observe. Think. Decide.",
+    heroTitle2: "Then challenge.",
+    heroSub:
+      "KOBI Soccer School develops each child's technique, decision-making and creativity. Rather than handing down answers, we build sessions where players have to look, think, choose and take on the challenge themselves.",
+    ctaTrial: "Book a trial",
+    ctaClasses: "See the schedule",
+    kickHint: "Tap anywhere — the ball reacts",
+    marquee:
+      "OBSERVE · UNDERSTAND · DECIDE · EXECUTE · ADAPT · CHALLENGE ·",
+    pillarsKicker: "Coaching philosophy",
+    pillarsTitle: "Six steps every player learns to run for themselves",
+    pillars: [
+      {
+        num: "01",
+        t: "Observe",
+        d: "Ball, teammates, opponents, space, goal, pressure. Everything starts with scanning what is actually happening around you.",
+      },
+      {
+        num: "02",
+        t: "Understand",
+        d: "Recognise what the situation is asking for, and what the real options are. Seeing is only useful once it means something.",
+      },
+      {
+        num: "03",
+        t: "Decide",
+        d: "Choose an action instead of waiting for the coach's command. The number of decisions a child makes is what moves them forward.",
+      },
+      {
+        num: "04",
+        t: "Execute",
+        d: "Play the chosen action with the right technique, quality and timing. This is where technique earns its meaning.",
+      },
+      {
+        num: "05",
+        t: "Adapt",
+        d: "Opponents, space, speed, new information. The picture keeps changing, so the next action has to change with it.",
+      },
+      {
+        num: "06",
+        t: "Challenge",
+        d: "Try, fail, learn, and try again. That courage is the quality we most want every player to leave with.",
+      },
+    ],
+    stats: [
+      { n: "70%", l: "Game-based training" },
+      { n: "90", l: "Minutes per session" },
+      { n: "3", l: "Days a week" },
+      { n: "2", l: "Training venues" },
+    ],
+    classesKicker: "Classes and fees",
+    classesTitle: "Classes & Fees",
+    classesIntro:
+      "Pay per session, or use a discounted ticket card. One-to-one private lessons are also available. Every new family is welcome to start with a trial session.",
+    seeAll: "See classes",
+    classes: [
+      {
+        name: "Regular class",
+        short: "Monday, Wednesday and Friday sessions.",
+        price: "¥1,000 per session",
+        long: "Our standard sessions on Monday, Wednesday and Friday. Built around small-sided games and one-v-one work, with focused technical practice whenever a player needs it. Children who already belong to a team are welcome.",
+        tags: ["90 min", "Mon / Wed / Fri", "Team players welcome"],
+      },
+      {
+        name: "Ticket card",
+        short: "Eleven sessions, bought together.",
+        price: "11 sessions ¥10,000",
+        long: "A card covering eleven sessions — about ¥909 each, cheaper than paying per visit. Ask on LINE for how the card works.",
+        tags: ["11 sessions", "≈ ¥909 each", "Regular class"],
+      },
+      {
+        name: "Private lesson",
+        short: "One-to-one, focused on one goal.",
+        price: "¥5,000 / 60 min",
+        long: "One coach, one player. We agree the current priority with the family and work on exactly that. Get in touch to arrange a time.",
+        tags: ["60 min", "By booking", "Fully personalised"],
+      },
+      {
+        name: "Trial session",
+        short: "Come and try before you decide.",
+        price: "Ask us",
+        long: "Join a normal class as it runs. Afterwards the coach will talk to you directly about what he saw and what your child could work on next. Apply through LINE.",
+        tags: ["A normal class", "Apply on LINE", "No obligation"],
+      },
+    ],
+    scheduleTitle: "Weekly schedule",
+    schedule: [
+      {
+        day: "Monday",
+        time: "17:00 – 18:30",
+        group: "Regular class",
+        place: "Ask us for the venue",
+      },
+      {
+        day: "Monday",
+        time: "18:30 – 20:00",
+        group: "Regular class",
+        place: "Ask us for the venue",
+      },
+      {
+        day: "Wednesday",
+        time: "17:00 – 18:00",
+        group: "First-grade class (when running)",
+        place: "Sano indoor facility",
+      },
+      {
+        day: "Wednesday",
+        time: "17:00 – 18:30",
+        group: "Regular class",
+        place: "Ask us for the venue",
+      },
+      {
+        day: "Wednesday",
+        time: "18:30 – 20:00",
+        group: "Regular class",
+        place: "Ask us for the venue",
+      },
+      {
+        day: "Friday",
+        time: "17:00 – 18:30",
+        group: "Regular class",
+        place: "Ask us for the venue",
+      },
+      {
+        day: "Friday",
+        time: "18:30 – 20:00",
+        group: "Regular class",
+        place: "Ask us for the venue",
+      },
+    ],
+    scheduleNote:
+      "Times and venues can change. Check LINE for the current schedule and for which venue a session is at.",
+    locationsTitle: "Where we train",
+    locations: [
+      {
+        name: "Sano indoor facility",
+        addr: "Sano, Awaji City, Hyogo (full address to follow)",
+        access: "Indoors, so sessions are rarely affected by the weather",
+      },
+      {
+        name: "Awaji City Hall futsal venue",
+        addr: "Awaji City, Hyogo (full address to follow)",
+        access: "Access and parking details to follow",
+      },
+    ],
+    trialCtaTitle: "Not sure which class fits?",
+    trialCtaSub:
+      "Message us on LINE with your child's school year and we will recommend one.",
+    coachKicker: "The coach",
+    coachName: "Kobi — Charif Abdelkabir",
+    coachIntro:
+      "Moroccan-born, and the founder of KOBI Soccer School on Awaji Island since May 2024. He runs every session himself.",
+    coachBio1:
+      "Kobi grew up in Morocco and built his coaching career in Japan. He has worked as Head of Soccer at a sports academy and coached junior-high-school football, before opening KOBI Soccer School on Awaji Island in May 2024.",
+    coachBio2:
+      "He holds the JFA B coaching licence, PFSA Opposition Analysis Levels 1 and 2, and FIFA Safeguarding certification. He continues to study, with the JFA A licence and coaching at a higher level as his long-term goal.",
+    coachQuote: "Before how — when, where, and why.",
+    philosophyTitle: "How we work",
+    philosophy: [
+      {
+        num: "01",
+        t: "The individual first",
+        d: "No child is locked into one position early. Receiving, carrying, passing, dribbling, finishing, defending, transitioning — we train what works in any role.",
+      },
+      {
+        num: "02",
+        t: "Learning inside the game",
+        d: "Roughly 70% of a session is small-sided games, rondos, numerical advantages and transitions. The other 30% is careful technical and coordination work.",
+      },
+      {
+        num: "03",
+        t: "Coaching by question",
+        d: "We ask rather than tell, so players spot the problem themselves. When a correction is needed it is clear — then the decision goes back to the player.",
+      },
+      {
+        num: "04",
+        t: "Room to fail",
+        d: "Mistakes are information, for the player and the coach. We praise observation, brave decisions, good timing and effort — not only the outcome.",
+      },
+    ],
+    pathTitle: "Background & qualifications",
+    timeline: [
+      {
+        year: "2024.05",
+        text: "Founded KOBI Soccer School on Awaji Island. Every session is coached by Kobi himself.",
+      },
+      {
+        year: "Experience",
+        text: "Head of Soccer at a sports academy; junior-high-school football coaching.",
+      },
+      {
+        year: "Licences",
+        text: "JFA B coaching licence · PFSA Opposition Analysis Levels 1 & 2 · FIFA Safeguarding.",
+      },
+      {
+        year: "Next",
+        text: "Working towards the JFA A licence and coaching at a higher level.",
+      },
+    ],
+    galleryKicker: "Inside a session",
+    galleryTitle: "Training gallery",
+    galleryIntro:
+      "Photos from real sessions on Awaji Island. Nothing staged — just children looking, thinking and taking things on.",
+    gallery: [
+      { src: "/uploads/team-group-photo.jpg", cap: "The whole school together" },
+      {
+        src: "/uploads/training-cone-dribbling.jpg",
+        cap: "Dribbling through the cones",
+      },
+      {
+        src: "/uploads/coach-with-players.jpg",
+        cap: "With the coach after a session",
+      },
+      { src: "/uploads/coach-portrait.jpg", cap: "Coach Kobi" },
+    ],
+    contactKicker: "Get in touch",
+    contactTitle: "Contact us",
+    contactIntro:
+      "LINE is the fastest way to reach us. Tell us your child's school year and which days or class you are interested in, and we will arrange a trial.",
+    lineCta: "Message on LINE",
+    igCta: "Follow on Instagram",
+    faqTitle: "Questions parents ask",
+    faqs: [
+      {
+        q: "Can a complete beginner join?",
+        a: "Yes. We adjust the rules, space, numbers and difficulty to the age and level in front of us. Beginners start by getting as many touches as possible and building up successful experiences.",
+      },
+      {
+        q: "Can my child join while playing for another team?",
+        a: "Yes. KOBI is designed to run alongside a team. The team teaches players how to play for the team; KOBI develops their individual technique, decision-making and creativity.",
+      },
+      {
+        q: "What should my child bring?",
+        a: "Comfortable kit, football shoes, shin pads, a drink and a change of clothes. Ask us on LINE if you are unsure about anything.",
+      },
+      {
+        q: "What happens when it rains?",
+        a: "Classes held at the indoor facility are rarely affected, so most sessions go ahead. If a session is cancelled or the venue changes, we let parents know on LINE.",
+      },
+      {
+        q: "How does payment work?",
+        a: "A regular session is ¥1,000. There is also a ticket card covering 11 sessions for ¥10,000. Private lessons are ¥5,000 for 60 minutes.",
+      },
+      {
+        q: "How do we apply for a trial?",
+        a: "Message us on LINE. Tell us your child's school year and the days that suit you, and we will send back availability and what to expect.",
+      },
+      {
+        q: "Are classes split by age or level?",
+        a: "Classes are split across the time slots. There is also a first-grade class on Wednesdays when it is running. See the weekly schedule for details.",
+      },
+      {
+        q: "What is the difference between KOBI and a team?",
+        a: "A team develops the ability to compete for the team. KOBI Soccer School develops the ability to become a better individual player. You do not have to choose — the two work together.",
+      },
+    ],
+    footerBlurb:
+      "A soccer school on Awaji Island. Observe, understand, decide, challenge — individual development first.",
+    navLabel: "Pages",
+    menuLabel: "Menu",
+    contactLabel: "Contact",
+    footerCity: "Awaji City, Hyogo",
+    readMore: "About the coach",
   },
 };

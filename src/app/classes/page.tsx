@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ClassesContent } from "./classes-content";
 
 export const metadata: Metadata = {
-  title: "Classes & Prices",
+  title: "クラス・料金",
   description:
-    "Regular group training, Saturday clinics, 1-on-1 coaching and trial sessions in Nada-ku and Higashinada-ku, Kobe. Weekly schedule and prices.",
+    "淡路島のサッカースクール KOBI のクラスと料金。レギュラークラスは1回¥1,000、11回¥10,000の回数券、個人レッスン60分¥5,000。週間スケジュールと練習会場のご案内。",
 };
 
 export default function ClassesPage() {

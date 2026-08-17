@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { CoachContent } from "./coach-content";
 
 export const metadata: Metadata = {
-  title: "The Coach",
+  title: "コーチ紹介",
   description:
-    "Yassine “Kobi” Amrani — Casablanca academy player, JFA C licence, coaching children in Kobe since 2019. Background, method and promises to parents.",
+    "KOBI SOCCER SCHOOL 代表コーチ「Kobi」シャリフ・アブデルカビル。モロッコ出身、JFA B級コーチライセンス。指導方針と経歴をご紹介します。",
 };
 
 export default function CoachPage() {

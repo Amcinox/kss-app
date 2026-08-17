@@ -40,7 +40,7 @@ function subscribe(listener: () => void) {
 function readLang(fallback: Lang): Lang {
   if (snapshot === null) {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    snapshot = stored === "en" || stored === "ja" ? stored : fallback;
+    snapshot = stored === "ja" || stored === "en" ? stored : fallback;
   }
   return snapshot;
 }
@@ -61,7 +61,7 @@ const LangContext = createContext<LangValue | null>(null);
 
 export function LangProvider({
   children,
-  defaultLang = "en",
+  defaultLang = "ja",
 }: {
   children: ReactNode;
   defaultLang?: Lang;
@@ -75,7 +75,7 @@ export function LangProvider({
   }, [lang]);
 
   const toggle = useCallback(
-    () => writeLang(readLang(defaultLang) === "en" ? "ja" : "en"),
+    () => writeLang(readLang(defaultLang) === "ja" ? "en" : "ja"),
     [defaultLang],
   );
 

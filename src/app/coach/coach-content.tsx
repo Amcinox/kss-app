@@ -7,8 +7,14 @@ import { useLang } from "@/lib/lang";
 
 const BLOCK_GAP = "mb-[clamp(56px,8vw,110px)]";
 
+/** Japanese runs full-width, so the coach's name needs a gentler scale. */
+const NAME_TYPE = {
+  ja: "text-[clamp(28px,4.6vw,58px)] leading-[1.18]",
+  en: "text-[clamp(40px,6.5vw,82px)] leading-[0.98]",
+} as const;
+
 export function CoachContent() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   return (
     <div className={`${CONTAINER} ${PAGE_PADDING}`}>
@@ -18,7 +24,9 @@ export function CoachContent() {
       >
         <div>
           <Kicker tone="pitch">{t.coachKicker}</Kicker>
-          <h1 className="m-0 mb-[22px] font-display text-[clamp(40px,6.5vw,82px)] leading-[0.98] font-bold uppercase">
+          <h1
+            className={`m-0 mb-[22px] font-display font-bold uppercase ${NAME_TYPE[lang]}`}
+          >
             {t.coachName}
           </h1>
           <p className="m-0 mb-[18px] text-[17px] leading-[1.8] text-pretty text-bone/72">
@@ -30,10 +38,10 @@ export function CoachContent() {
         </div>
 
         <Image
-          src="/uploads/coach.jpg"
+          src="/uploads/coach-portrait.jpg"
           alt={t.coachName}
-          width={1371}
-          height={1600}
+          width={1254}
+          height={1254}
           priority
           sizes="(max-width: 900px) 100vw, 560px"
           className="block max-h-[560px] w-full rounded-lg object-cover object-top"

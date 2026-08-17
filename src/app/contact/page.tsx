@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ContactContent } from "./contact-content";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "お問い合わせ",
   description:
-    "Reach Kobi Soccer School on LINE or Instagram to arrange a trial session in Kobe, plus answers to the questions parents ask most.",
+    "KOBI SOCCER SCHOOL へのお問い合わせと体験練習のお申し込み。LINEが一番早くご連絡いただけます。よくあるご質問も掲載しています。",
 };
 
 export default function ContactPage() {

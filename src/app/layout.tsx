@@ -21,25 +21,31 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
+  // Set NEXT_PUBLIC_SITE_URL at deploy time so social-share URLs resolve.
+  metadataBase: process.env.NEXT_PUBLIC_SITE_URL
+    ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+    : undefined,
   title: {
-    default: "Kobi Soccer School",
-    template: "%s · Kobi Soccer School",
+    default: "KOBI SOCCER SCHOOL｜淡路島のサッカースクール",
+    template: "%s｜KOBI SOCCER SCHOOL",
   },
   description:
-    "Small-group football coaching for children in Kobe. Technique, decisions, character. Ages 4–14, led by coach Yassine “Kobi” Amrani.",
+    "兵庫県淡路市のサッカースクール。自分で観て、考えて、挑戦できる選手へ。ゲームの中で技術・判断力・創造性を育てます。体験練習受付中。",
   keywords: [
-    "Kobi Soccer School",
-    "Kobe football school",
-    "神戸 サッカースクール",
-    "Hyogo youth football",
+    "KOBI SOCCER SCHOOL",
+    "淡路島 サッカースクール",
+    "淡路市 サッカー",
+    "兵庫 サッカースクール",
+    "Awaji soccer school",
   ],
   openGraph: {
-    title: "Kobi Soccer School",
+    title: "KOBI SOCCER SCHOOL｜淡路島のサッカースクール",
     description:
-      "Small-group football coaching for children in Kobe. Technique, decisions, character.",
+      "自分で観て、考えて、挑戦できる選手へ。淡路島で個の育成を行うサッカースクールです。",
     type: "website",
-    locale: "en",
-    alternateLocale: "ja_JP",
+    locale: "ja_JP",
+    alternateLocale: "en",
+    images: ["/uploads/banner-wide.jpg"],
   },
 };
 
@@ -59,7 +65,7 @@ const SCENE_WASH =
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="ja"
       data-scroll-behavior="smooth"
       className={`${barlow.variable} ${barlowCondensed.variable} h-full`}
     >

@@ -17,8 +17,18 @@ import { useLang } from "@/lib/lang";
 const CARD =
   "h-full rounded-md border border-bone/12 backdrop-blur-[6px] transition-colors";
 
+/**
+ * Japanese sets full-width, so the same point size runs roughly twice as wide as
+ * Latin. The headline gets its own scale per language rather than one clamp that
+ * is either timid in English or overflowing in Japanese.
+ */
+const HERO_TYPE = {
+  ja: "text-[clamp(26px,7.4vw,86px)] leading-[1.12] tracking-[0.01em]",
+  en: "max-w-[15ch] text-[clamp(46px,9vw,124px)] leading-[0.92] tracking-[-0.01em] text-balance",
+} as const;
+
 export function HomeContent() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   return (
     <>
@@ -36,7 +46,7 @@ export function HomeContent() {
           </p>
 
           <h1
-            className="m-0 mb-[30px] max-w-[15ch] font-display text-[clamp(46px,9vw,124px)] leading-[0.92] font-bold tracking-[-0.01em] text-balance uppercase"
+            className={`m-0 mb-[30px] font-display font-bold uppercase ${HERO_TYPE[lang]}`}
             style={{ animation: "rise .8s ease both" }}
           >
             {t.heroTitle1}
@@ -112,7 +122,10 @@ export function HomeContent() {
       <section className={`${CONTAINER} ${SECTION_PADDING}`}>
         <Kicker>{t.pillarsKicker}</Kicker>
         <Reveal>
-          <SectionTitle className="mb-12 max-w-[20ch]">
+          {/* `ch` is half a full-width glyph, so a Latin measure orphans Japanese. */}
+          <SectionTitle
+            className={`mb-12 ${lang === "ja" ? "max-w-[34ch]" : "max-w-[20ch]"}`}
+          >
             {t.pillarsTitle}
           </SectionTitle>
         </Reveal>
@@ -203,10 +216,10 @@ export function HomeContent() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center gap-11 rounded-lg border border-bone/12 bg-[rgba(11,14,12,0.7)] p-[clamp(24px,4vw,48px)]">
           <Parallax speed={0.7}>
             <Image
-              src="/uploads/coach.jpg"
+              src="/uploads/coach-portrait.jpg"
               alt={t.coachName}
-              width={1371}
-              height={1600}
+              width={1254}
+              height={1254}
               sizes="(max-width: 900px) 100vw, 560px"
               className="block max-h-[480px] w-full rounded-md object-cover object-top"
             />

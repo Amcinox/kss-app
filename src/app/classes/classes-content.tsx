@@ -62,9 +62,7 @@ export function ClassesContent() {
 
       {/* ---- weekly schedule ---- */}
       <SubTitle>{t.scheduleTitle}</SubTitle>
-      <ul
-        className={`list-none overflow-hidden rounded-md border border-bone/13 p-0 ${BLOCK_GAP}`}
-      >
+      <ul className="list-none overflow-hidden rounded-md border border-bone/13 p-0">
         {t.schedule.map((row, i) => (
           <li key={`${row.day}-${row.time}`}>
             <Reveal
@@ -87,6 +85,11 @@ export function ClassesContent() {
           </li>
         ))}
       </ul>
+      <p
+        className={`mt-4 max-w-[60ch] text-[14.5px] leading-[1.7] text-bone/55 ${BLOCK_GAP}`}
+      >
+        {t.scheduleNote}
+      </p>
 
       {/* ---- grounds ---- */}
       <SubTitle>{t.locationsTitle}</SubTitle>
