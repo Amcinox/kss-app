@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {
+  EMAIL,
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
   LINE_HANDLE,
@@ -54,6 +55,16 @@ export function ContactContent() {
           <span className={`${CHANNEL_LABEL} text-rose`}>Instagram</span>
           <span className={CHANNEL_TITLE}>{t.igCta}</span>
           <span className="text-[15px] text-bone/60">{INSTAGRAM_HANDLE}</span>
+        </a>
+
+        {/* No target/rel — a mailto: hands off to the mail client, not a tab. */}
+        <a
+          href={`mailto:${EMAIL}`}
+          className={`${CHANNEL_CARD} border-bone/25 bg-bone/6 hover:bg-bone/12`}
+        >
+          <span className={`${CHANNEL_LABEL} text-bone/70`}>Email</span>
+          <span className={CHANNEL_TITLE}>{t.emailCta}</span>
+          <span className="text-[15px] break-all text-bone/60">{EMAIL}</span>
         </a>
       </div>
 

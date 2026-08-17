@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/motion";
 import { CONTAINER, Kicker, PAGE_PADDING, SubTitle } from "@/components/ui";
+import { COACH_INSTAGRAM_HANDLE, COACH_INSTAGRAM_URL } from "@/lib/copy";
 import { useLang } from "@/lib/lang";
 
 const BLOCK_GAP = "mb-[clamp(56px,8vw,110px)]";
@@ -32,9 +33,21 @@ export function CoachContent() {
           <p className="m-0 mb-[18px] text-[17px] leading-[1.8] text-pretty text-bone/72">
             {t.coachBio1}
           </p>
-          <p className="m-0 text-[17px] leading-[1.8] text-pretty text-bone/72">
+          <p className="m-0 mb-7 text-[17px] leading-[1.8] text-pretty text-bone/72">
             {t.coachBio2}
           </p>
+
+          <a
+            href={COACH_INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-full border border-bone/25 px-[22px] py-3 font-display text-sm tracking-[0.14em] uppercase transition-colors hover:border-blood hover:text-blood"
+          >
+            {t.coachIgCta}
+            <span className="tracking-normal normal-case opacity-60">
+              {COACH_INSTAGRAM_HANDLE}
+            </span>
+          </a>
         </div>
 
         <Image

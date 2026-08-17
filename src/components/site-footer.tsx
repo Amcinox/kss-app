@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  EMAIL,
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
   LINE_HANDLE,
@@ -63,6 +64,12 @@ export function SiteFooter() {
             className="text-[15px] text-bone/80 transition-colors hover:text-blood"
           >
             Instagram {INSTAGRAM_HANDLE}
+          </a>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="text-[15px] break-all text-bone/80 transition-colors hover:text-blood"
+          >
+            {EMAIL}
           </a>
           <span className="text-[15px] text-bone/50">{t.footerCity}</span>
         </div>

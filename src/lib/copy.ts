@@ -79,6 +79,8 @@ export type Copy = {
   contactIntro: string;
   lineCta: string;
   igCta: string;
+  emailCta: string;
+  coachIgCta: string;
   faqTitle: string;
   faqs: Faq[];
   footerBlurb: string;
@@ -90,14 +92,21 @@ export type Copy = {
 };
 
 /**
- * TODO — placeholders. The brief lists the official LINE URL / QR code and the
- * Instagram URL among the items Kobi must supply before launch; these came from
- * the original mock-up and have not been verified.
+ * TODO — still the mock-up's placeholder. The official LINE URL / QR code is on
+ * the brief's list of things Kobi must supply before launch, and every page
+ * points LINE-first, so this is the last link that needs replacing.
  */
 export const LINE_URL = "https://line.me/R/ti/p/@kobisoccer";
 export const LINE_HANDLE = "@kobisoccer";
-export const INSTAGRAM_URL = "https://instagram.com/kobi.soccer.school";
-export const INSTAGRAM_HANDLE = "@kobi.soccer.school";
+
+export const EMAIL = "contact@kobisoccerschool.com";
+
+export const INSTAGRAM_URL = "https://instagram.com/kobisoccerschool.awajishima";
+export const INSTAGRAM_HANDLE = "@kobisoccerschool.awajishima";
+
+/** Kobi's own coaching account, separate from the school's. */
+export const COACH_INSTAGRAM_URL = "https://instagram.com/Kobi.coach";
+export const COACH_INSTAGRAM_HANDLE = "@Kobi.coach";
 
 /** Route for each entry of `Copy.nav`, in the same order. */
 export const NAV_ROUTES = [
@@ -360,9 +369,11 @@ export const COPY: Record<Lang, Copy> = {
     contactKicker: "お問い合わせ",
     contactTitle: "ご連絡ください",
     contactIntro:
-      "一番早いのは LINE です。お子様の学年と、ご希望の曜日やクラスをお知らせください。初回無料の体験練習をご案内します。",
+      "一番早いのは LINE です。メールでも承ります。お子様の学年と、ご希望の曜日やクラスをお知らせください。初回無料の体験練習をご案内します。",
     lineCta: "LINEで問い合わせる",
     igCta: "Instagramを見る",
+    emailCta: "メールを送る",
+    coachIgCta: "コーチのInstagram",
     faqTitle: "よくあるご質問",
     faqs: [
       {
@@ -654,9 +665,11 @@ export const COPY: Record<Lang, Copy> = {
     contactKicker: "Get in touch",
     contactTitle: "Contact us",
     contactIntro:
-      "LINE is the fastest way to reach us. Tell us your child's school year and which days or class you are interested in, and we will arrange a free trial session.",
+      "LINE is the fastest way to reach us, and email works too. Tell us your child's school year and which days or class you are interested in, and we will arrange a free trial session.",
     lineCta: "Message on LINE",
     igCta: "Follow on Instagram",
+    emailCta: "Email us",
+    coachIgCta: "Kobi on Instagram",
     faqTitle: "Questions parents ask",
     faqs: [
       {
