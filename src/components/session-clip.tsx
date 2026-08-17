@@ -78,8 +78,10 @@ export function SessionClip({ clip }: { clip: Clip }) {
         <span
           aria-hidden
           className={`absolute inset-x-0 bottom-0 flex items-end justify-start bg-linear-to-t from-black/55 to-transparent p-3 transition-opacity ${
+            // Never fully hidden: on a touch screen there is no hover, and the
+            // pause control has to stay findable while the clip is moving.
             playing
-              ? "opacity-0 group-hover:opacity-100 group-focus:opacity-100"
+              ? "opacity-55 group-hover:opacity-100 group-focus:opacity-100"
               : "opacity-100"
           }`}
         >

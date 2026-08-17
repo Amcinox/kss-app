@@ -19,7 +19,9 @@ export function GalleryContent() {
 
       {/* ---- clips ---- */}
       <SubTitle>{t.clipsTitle}</SubTitle>
-      <div className="mb-[clamp(56px,8vw,100px)] grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {/* Both clips are shot vertically, so the pair is capped rather than
+          stretched across the full column width. */}
+      <div className="mb-[clamp(56px,8vw,100px)] grid grid-cols-2 gap-4 sm:max-w-[720px]">
         {t.clips.map((clip, i) => (
           <Reveal key={clip.src} variant="swing" index={i}>
             <SessionClip clip={clip} />
