@@ -37,6 +37,13 @@ export function SiteHeader() {
   const pathname = usePathname();
   const progressRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuPath, setMenuPath] = useState(pathname);
+
+  // The panel is a navigation aid, not page state — drop it once we've moved.
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
+    setMenuOpen(false);
+  }
 
   useEffect(() => {
     const onScroll = () => {
@@ -50,9 +57,6 @@ export function SiteHeader() {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
-
-  // The panel is a navigation aid, not page state — close it once we've moved.
-  useEffect(() => setMenuOpen(false), [pathname]);
 
   useEffect(() => {
     if (!menuOpen) return;

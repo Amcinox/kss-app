@@ -70,6 +70,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="https://fonts.gstatic.com"
           crossOrigin=""
         />
+        {/*
+          Noto Sans JP is loaded from Google rather than `next/font/google`
+          because next/font only offers its latin subsets — self-hosting it that
+          way would ship the file without a single Japanese glyph. The lint rule
+          below targets per-page fonts in the Pages Router; this is the App
+          Router root layout, so the stylesheet applies to every route.
+        */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
           precedence="default"

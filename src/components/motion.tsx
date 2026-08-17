@@ -10,6 +10,7 @@ import {
   useSyncExternalStore,
   type CSSProperties,
   type ReactNode,
+  type RefObject,
 } from "react";
 
 const useIsomorphicLayoutEffect =
@@ -32,9 +33,11 @@ function useReducedMotion() {
   );
 }
 
-/** Fires once, the first time the returned ref's element scrolls into view. */
-function useInView<T extends HTMLElement>(onEnter: () => void) {
-  const ref = useRef<T>(null);
+/** Fires `onEnter` once, the first time `ref`'s element scrolls into view. */
+function useInView(
+  ref: RefObject<HTMLElement | null>,
+  onEnter: () => void,
+): void {
   const latest = useRef(onEnter);
 
   useEffect(() => {
@@ -55,9 +58,7 @@ function useInView<T extends HTMLElement>(onEnter: () => void) {
     );
     observer.observe(element);
     return () => observer.disconnect();
-  }, []);
-
-  return ref;
+  }, [ref]);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -111,8 +112,9 @@ export function Reveal({
 }) {
   const [entered, setEntered] = useState(false);
   const reduced = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
   const onEnter = useCallback(() => setEntered(true), []);
-  const ref = useInView<HTMLDivElement>(onEnter);
+  useInView(ref, onEnter);
 
   const [transform, origin] = REVEAL_VARIANTS[variant];
   const delay = `${((index % 6) * 0.075).toFixed(3)}s`;
@@ -172,6 +174,7 @@ export function CountUp({
   }, [value]);
 
   const animates = parsed !== null && !reduced;
+  const ref = useRef<HTMLDivElement>(null);
 
   const start = useCallback(() => {
     const node = ref.current;
@@ -180,19 +183,20 @@ export function CountUp({
     const t0 = performance.now();
     const step = (now: number) => {
       const k = Math.min(1, (now - t0) / 900);
-      node.textContent = Math.round(parsed.end * (1 - (1 - k) ** 3)) + parsed.suffix;
+      node.textContent =
+        Math.round(parsed.end * (1 - (1 - k) ** 3)) + parsed.suffix;
       if (k < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
   }, [parsed, reduced]);
 
-  const ref = useInView<HTMLDivElement>(start);
+  useInView(ref, start);
 
   // Zero it before the first paint so the count is never seen finishing first.
   useIsomorphicLayoutEffect(() => {
     if (!animates || !parsed || !ref.current) return;
     ref.current.textContent = `0${parsed.suffix}`;
-  }, [animates, parsed, ref]);
+  }, [animates, parsed]);
 
   return (
     <div ref={ref} className={className}>
