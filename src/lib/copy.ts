@@ -18,6 +18,14 @@ export type ScheduleRow = {
 export type Ground = { name: string; addr: string; access: string };
 export type TimelineEntry = { year: string; text: string };
 export type Photo = { src: string; cap: string };
+/** A short training video. `w`/`h` are the source pixels, for the aspect ratio. */
+export type Clip = {
+  src: string;
+  poster: string;
+  cap: string;
+  w: number;
+  h: number;
+};
 export type Faq = { q: string; a: string };
 
 export type Copy = {
@@ -60,6 +68,11 @@ export type Copy = {
   galleryKicker: string;
   galleryTitle: string;
   galleryIntro: string;
+  clipsTitle: string;
+  clips: Clip[];
+  clipPlay: string;
+  clipPause: string;
+  photosTitle: string;
   gallery: Photo[];
   contactKicker: string;
   contactTitle: string;
@@ -104,7 +117,7 @@ export const COPY: Record<Lang, Copy> = {
     heroTitle2: "挑戦できる選手へ。",
     heroSub:
       "KOBI SOCCER SCHOOL は、子ども一人ひとりの技術・判断力・創造性を育てるサッカースクールです。答えを上から与えるだけではなく、ゲームの中で観て、考え、決めて、挑戦する経験を大切にしています。",
-    ctaTrial: "体験を申し込む",
+    ctaTrial: "無料体験を申し込む",
     ctaClasses: "スケジュールを見る",
     kickHint: "画面をタップするとボールが動きます",
     marquee:
@@ -147,12 +160,12 @@ export const COPY: Record<Lang, Copy> = {
       { n: "70%", l: "ゲーム形式の練習" },
       { n: "90", l: "分 ／ 1回の練習" },
       { n: "3", l: "曜日 ／ 週" },
-      { n: "2", l: "練習会場" },
+      { n: "3", l: "練習会場" },
     ],
     classesKicker: "クラスと料金",
     classesTitle: "クラス・料金",
     classesIntro:
-      "参加は1回ごとのお支払い、またはお得な回数券をご利用いただけます。マンツーマンの個人レッスンもご用意しています。まずは体験練習からお越しください。",
+      "初回の体験練習は無料です。その後は1回ごとのお支払い、またはお得な回数券をご利用いただけます。マンツーマンの個人レッスンもご用意しています。まずは一度、練習を見にいらしてください。",
     seeAll: "クラスを見る",
     classes: [
       {
@@ -172,16 +185,16 @@ export const COPY: Record<Lang, Copy> = {
       {
         name: "個人レッスン",
         short: "マンツーマンで課題に集中",
-        price: "60分 ¥5,000",
+        price: "60分 ¥6,000",
         long: "コーチ1名に選手1名。今の課題をご家庭と一緒に確認し、そのお子様に必要なテーマへ集中して取り組みます。ご希望の日程はご相談ください。",
         tags: ["60分", "予約制", "個別対応"],
       },
       {
         name: "体験練習",
-        short: "まずは一度、参加してみてください",
-        price: "お問い合わせください",
-        long: "通常のクラスにそのまま参加していただけます。練習後にコーチから、お子様の様子と次に伸ばしたい点を直接お話しします。LINEからお申し込みください。",
-        tags: ["通常クラスに参加", "LINEで申込", "入会義務なし"],
+        short: "初回は無料です",
+        price: "初回無料",
+        long: "初めての体験練習は無料です。通常のクラスにそのまま参加していただけます。練習後にコーチから、お子様の様子と次に伸ばしたい点を直接お話しします。LINEからお申し込みください。",
+        tags: ["初回無料", "通常クラスに参加", "入会義務なし"],
       },
     ],
     scheduleTitle: "週間スケジュール",
@@ -243,10 +256,20 @@ export const COPY: Record<Lang, Copy> = {
         addr: "兵庫県淡路市（詳細住所は準備中）",
         access: "アクセス・駐車場のご案内は準備中です",
       },
+      /**
+       * TODO — the third ground's real name. The developer brief only names the
+       * two above, so this card stays deliberately vague rather than guessing at
+       * a venue a parent might then drive to.
+       */
+      {
+        name: "第3の練習会場",
+        addr: "兵庫県淡路市（名称・詳細住所は準備中）",
+        access: "当日の会場はLINEにてご案内しています",
+      },
     ],
     trialCtaTitle: "どのクラスか迷われたら",
     trialCtaSub:
-      "LINEでお子様の学年をお知らせください。おすすめのクラスをご案内します。",
+      "LINEでお子様の学年をお知らせください。おすすめのクラスをご案内します。初回の体験は無料です。",
     coachKicker: "コーチ紹介",
     coachName: "「Kobi」シャリフ・アブデルカビル",
     coachIntro:
@@ -301,7 +324,27 @@ export const COPY: Record<Lang, Copy> = {
     galleryKicker: "練習風景",
     galleryTitle: "ギャラリー",
     galleryIntro:
-      "淡路島での実際の練習の写真です。演出はありません。子どもたちが自分で観て、考えて、挑戦している時間です。",
+      "淡路島での実際の練習の様子です。演出はありません。子どもたちが自分で観て、考えて、挑戦している時間です。",
+    clipsTitle: "動画で見る練習",
+    clips: [
+      {
+        src: "/uploads/session-indoor-ball-mastery.mp4",
+        poster: "/uploads/session-indoor-ball-mastery-poster.jpg",
+        cap: "屋内でのボールマスタリー",
+        w: 464,
+        h: 832,
+      },
+      {
+        src: "/uploads/session-indoor-dribbling.mp4",
+        poster: "/uploads/session-indoor-dribbling-poster.jpg",
+        cap: "ドリブルとボールコントロール",
+        w: 576,
+        h: 1024,
+      },
+    ],
+    clipPlay: "再生",
+    clipPause: "一時停止",
+    photosTitle: "写真",
     gallery: [
       { src: "/uploads/team-group-photo.jpg", cap: "スクール全員での集合写真" },
       {
@@ -317,7 +360,7 @@ export const COPY: Record<Lang, Copy> = {
     contactKicker: "お問い合わせ",
     contactTitle: "ご連絡ください",
     contactIntro:
-      "一番早いのは LINE です。お子様の学年と、ご希望の曜日やクラスをお知らせください。体験練習をご案内します。",
+      "一番早いのは LINE です。お子様の学年と、ご希望の曜日やクラスをお知らせください。初回無料の体験練習をご案内します。",
     lineCta: "LINEで問い合わせる",
     igCta: "Instagramを見る",
     faqTitle: "よくあるご質問",
@@ -340,11 +383,11 @@ export const COPY: Record<Lang, Copy> = {
       },
       {
         q: "お支払いはどうなりますか？",
-        a: "通常参加は1回 ¥1,000 です。11回分 ¥10,000 の回数券もご利用いただけます。個人レッスンは60分 ¥5,000 です。",
+        a: "初回の体験練習は無料です。その後の通常参加は1回 ¥1,000、11回分 ¥10,000 の回数券もご利用いただけます。個人レッスンは60分 ¥6,000 です。",
       },
       {
         q: "体験はどう申し込めばいいですか？",
-        a: "LINEからご連絡ください。お子様の学年とご希望の曜日をお知らせいただければ、空き状況と当日のご案内をお送りします。",
+        a: "LINEからご連絡ください。お子様の学年とご希望の曜日をお知らせいただければ、空き状況と当日のご案内をお送りします。初回の体験は無料で、入会の義務もありません。",
       },
       {
         q: "クラスは年齢やレベルで分かれていますか？",
@@ -372,7 +415,7 @@ export const COPY: Record<Lang, Copy> = {
     heroTitle2: "Then challenge.",
     heroSub:
       "KOBI Soccer School develops each child's technique, decision-making and creativity. Rather than handing down answers, we build sessions where players have to look, think, choose and take on the challenge themselves.",
-    ctaTrial: "Book a trial",
+    ctaTrial: "Book a free trial",
     ctaClasses: "See the schedule",
     kickHint: "Tap anywhere — the ball reacts",
     marquee:
@@ -415,12 +458,12 @@ export const COPY: Record<Lang, Copy> = {
       { n: "70%", l: "Game-based training" },
       { n: "90", l: "Minutes per session" },
       { n: "3", l: "Days a week" },
-      { n: "2", l: "Training venues" },
+      { n: "3", l: "Training venues" },
     ],
     classesKicker: "Classes and fees",
     classesTitle: "Classes & Fees",
     classesIntro:
-      "Pay per session, or use a discounted ticket card. One-to-one private lessons are also available. Every new family is welcome to start with a trial session.",
+      "The first trial session is free. After that, pay per session or use a discounted ticket card. One-to-one private lessons are also available. Every new family is welcome to come and watch a session first.",
     seeAll: "See classes",
     classes: [
       {
@@ -440,16 +483,16 @@ export const COPY: Record<Lang, Copy> = {
       {
         name: "Private lesson",
         short: "One-to-one, focused on one goal.",
-        price: "¥5,000 / 60 min",
+        price: "¥6,000 / 60 min",
         long: "One coach, one player. We agree the current priority with the family and work on exactly that. Get in touch to arrange a time.",
         tags: ["60 min", "By booking", "Fully personalised"],
       },
       {
         name: "Trial session",
-        short: "Come and try before you decide.",
-        price: "Ask us",
-        long: "Join a normal class as it runs. Afterwards the coach will talk to you directly about what he saw and what your child could work on next. Apply through LINE.",
-        tags: ["A normal class", "Apply on LINE", "No obligation"],
+        short: "Your first one is on us.",
+        price: "Free",
+        long: "The first trial session is free. Join a normal class as it runs, and afterwards the coach will talk to you directly about what he saw and what your child could work on next. Apply through LINE.",
+        tags: ["First one free", "A normal class", "No obligation"],
       },
     ],
     scheduleTitle: "Weekly schedule",
@@ -511,10 +554,16 @@ export const COPY: Record<Lang, Copy> = {
         addr: "Awaji City, Hyogo (full address to follow)",
         access: "Access and parking details to follow",
       },
+      /** See the Japanese entry — the third ground's real name is still to come. */
+      {
+        name: "Third venue",
+        addr: "Awaji City, Hyogo (name and address to follow)",
+        access: "We confirm each session's venue on LINE",
+      },
     ],
     trialCtaTitle: "Not sure which class fits?",
     trialCtaSub:
-      "Message us on LINE with your child's school year and we will recommend one.",
+      "Message us on LINE with your child's school year and we will recommend one. The first trial is free.",
     coachKicker: "The coach",
     coachName: "Kobi — Charif Abdelkabir",
     coachIntro:
@@ -569,7 +618,27 @@ export const COPY: Record<Lang, Copy> = {
     galleryKicker: "Inside a session",
     galleryTitle: "Training gallery",
     galleryIntro:
-      "Photos from real sessions on Awaji Island. Nothing staged — just children looking, thinking and taking things on.",
+      "Real sessions on Awaji Island. Nothing staged — just children looking, thinking and taking things on.",
+    clipsTitle: "Sessions in motion",
+    clips: [
+      {
+        src: "/uploads/session-indoor-ball-mastery.mp4",
+        poster: "/uploads/session-indoor-ball-mastery-poster.jpg",
+        cap: "Ball mastery, indoors",
+        w: 464,
+        h: 832,
+      },
+      {
+        src: "/uploads/session-indoor-dribbling.mp4",
+        poster: "/uploads/session-indoor-dribbling-poster.jpg",
+        cap: "Dribbling and close control",
+        w: 576,
+        h: 1024,
+      },
+    ],
+    clipPlay: "Play",
+    clipPause: "Pause",
+    photosTitle: "Photographs",
     gallery: [
       { src: "/uploads/team-group-photo.jpg", cap: "The whole school together" },
       {
@@ -585,7 +654,7 @@ export const COPY: Record<Lang, Copy> = {
     contactKicker: "Get in touch",
     contactTitle: "Contact us",
     contactIntro:
-      "LINE is the fastest way to reach us. Tell us your child's school year and which days or class you are interested in, and we will arrange a trial.",
+      "LINE is the fastest way to reach us. Tell us your child's school year and which days or class you are interested in, and we will arrange a free trial session.",
     lineCta: "Message on LINE",
     igCta: "Follow on Instagram",
     faqTitle: "Questions parents ask",
@@ -608,11 +677,11 @@ export const COPY: Record<Lang, Copy> = {
       },
       {
         q: "How does payment work?",
-        a: "A regular session is ¥1,000. There is also a ticket card covering 11 sessions for ¥10,000. Private lessons are ¥5,000 for 60 minutes.",
+        a: "The first trial session is free. After that a regular session is ¥1,000, and there is a ticket card covering 11 sessions for ¥10,000. Private lessons are ¥6,000 for 60 minutes.",
       },
       {
         q: "How do we apply for a trial?",
-        a: "Message us on LINE. Tell us your child's school year and the days that suit you, and we will send back availability and what to expect.",
+        a: "Message us on LINE. Tell us your child's school year and the days that suit you, and we will send back availability and what to expect. The first session is free, with no obligation to join.",
       },
       {
         q: "Are classes split by age or level?",

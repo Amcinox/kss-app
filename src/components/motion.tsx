@@ -25,7 +25,7 @@ function subscribeToMotionPreference(listener: () => void) {
 }
 
 /** Tracks the OS "reduce motion" setting, and follows it if it changes. */
-function useReducedMotion() {
+export function useReducedMotion() {
   return useSyncExternalStore(
     subscribeToMotionPreference,
     () => window.matchMedia(REDUCED_MOTION_QUERY).matches,
