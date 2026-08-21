@@ -5,6 +5,8 @@ import { LangProvider } from "@/lib/lang";
 import { PitchScene } from "@/components/pitch-scene";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { GA_ID } from "@/lib/analytics";
 
 const barlow = Barlow({
   variable: "--font-barlow",
@@ -104,6 +106,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <SiteFooter />
           </div>
         </LangProvider>
+
+        {/*
+          Renders only when NEXT_PUBLIC_GA_ID is set, so `pnpm dev` never counts
+          itself. GA4 enhanced measurement is on for this stream, which covers
+          the App Router's client-side navigations through its history-change
+          page views — there is no manual pageview call to make here.
+        */}
+        {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
       </body>
     </html>
   );

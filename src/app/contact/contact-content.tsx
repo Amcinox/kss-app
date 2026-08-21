@@ -10,6 +10,7 @@ import {
 } from "@/lib/copy";
 import { CONTAINER, PAGE_PADDING, PageHeading, SubTitle } from "@/components/ui";
 import { useLang } from "@/lib/lang";
+import { trackContact } from "@/lib/analytics";
 
 const CHANNEL_CARD =
   "flex min-h-[150px] flex-col justify-center gap-2.5 rounded-lg border px-[30px] py-[34px] transition-colors";
@@ -39,6 +40,7 @@ export function ContactContent() {
           href={LINE_URL}
           target="_blank"
           rel="noopener"
+          onClick={() => trackContact("line")}
           className={`${CHANNEL_CARD} border-pitch/50 bg-pitch/10 hover:bg-pitch/22`}
         >
           <span className={`${CHANNEL_LABEL} text-mint`}>LINE</span>
@@ -50,6 +52,7 @@ export function ContactContent() {
           href={INSTAGRAM_URL}
           target="_blank"
           rel="noopener"
+          onClick={() => trackContact("instagram")}
           className={`${CHANNEL_CARD} border-blood/50 bg-blood/10 hover:bg-blood/22`}
         >
           <span className={`${CHANNEL_LABEL} text-rose`}>Instagram</span>
@@ -60,6 +63,7 @@ export function ContactContent() {
         {/* No target/rel — a mailto: hands off to the mail client, not a tab. */}
         <a
           href={`mailto:${EMAIL}`}
+          onClick={() => trackContact("email")}
           className={`${CHANNEL_CARD} border-bone/25 bg-bone/6 hover:bg-bone/12`}
         >
           <span className={`${CHANNEL_LABEL} text-bone/70`}>Email</span>
