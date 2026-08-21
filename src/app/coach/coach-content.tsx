@@ -14,6 +14,13 @@ const NAME_TYPE = {
   en: "text-[clamp(40px,6.5vw,82px)] leading-[0.98]",
 } as const;
 
+/**
+ * `ch` is sized from the display font's "0", which is narrow, so the same
+ * measure that frames the English tagline snaps the Japanese one after 創造性
+ * and strands the "×" at the head of the next line.
+ */
+const QUOTE_WIDTH = { ja: "max-w-[70ch]", en: "max-w-[40ch]" } as const;
+
 export function CoachContent() {
   const { t, lang } = useLang();
 
@@ -33,8 +40,11 @@ export function CoachContent() {
           <p className="m-0 mb-[18px] text-[17px] leading-[1.8] text-pretty text-bone/72">
             {t.coachBio1}
           </p>
-          <p className="m-0 mb-7 text-[17px] leading-[1.8] text-pretty text-bone/72">
+          <p className="m-0 mb-[18px] text-[17px] leading-[1.8] text-pretty text-bone/72">
             {t.coachBio2}
+          </p>
+          <p className="m-0 mb-7 text-[17px] leading-[1.8] text-pretty text-bone/72">
+            {t.coachBio3}
           </p>
 
           <a
@@ -63,9 +73,9 @@ export function CoachContent() {
 
       {/* ---- pull quote ---- */}
       <blockquote
-        className={`max-w-[40ch] border-l-[3px] border-blood py-2 pl-[26px] ${BLOCK_GAP}`}
+        className={`border-l-[3px] border-blood py-2 pl-[26px] ${QUOTE_WIDTH[lang]} ${BLOCK_GAP}`}
       >
-        <p className="m-0 font-display text-[clamp(24px,3.5vw,40px)] leading-[1.25] uppercase">
+        <p className="m-0 font-display text-[clamp(24px,3.5vw,40px)] leading-[1.25] text-balance uppercase">
           {t.coachQuote}
         </p>
       </blockquote>
@@ -92,26 +102,65 @@ export function CoachContent() {
         ))}
       </div>
 
-      {/* ---- background ---- */}
+      {/* ---- coaching career ---- */}
       <SubTitle>{t.pathTitle}</SubTitle>
-      <ol className="list-none p-0">
+      <ol className={`list-none p-0 ${BLOCK_GAP}`}>
         {t.timeline.map((entry, i) => (
           <li key={entry.year}>
             <Reveal
               variant="roll"
               index={i}
-              className="grid grid-cols-1 items-baseline gap-1 border-b border-bone/10 py-[22px] sm:grid-cols-[110px_1fr] sm:gap-6"
+              className="grid grid-cols-1 gap-1 border-b border-bone/10 py-[22px] sm:grid-cols-[120px_1fr] sm:gap-6"
             >
-              <span className="font-display text-[22px] tracking-[0.06em] text-blood">
+              <span className="font-display text-[22px] leading-[1.5] tracking-[0.06em] text-blood">
                 {entry.year}
               </span>
-              <span className="text-base leading-[1.65] text-bone/78">
-                {entry.text}
-              </span>
+              {/* One period can carry more than one post — Kobi held two in 2023. */}
+              <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
+                {entry.roles.map((role) => (
+                  <li
+                    key={role}
+                    className="text-base leading-[1.65] text-pretty text-bone/78"
+                  >
+                    {role}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </li>
         ))}
       </ol>
+
+      {/* ---- qualifications and playing career ---- */}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-x-11 gap-y-[clamp(48px,7vw,80px)]">
+        <section>
+          <SubTitle>{t.credsTitle}</SubTitle>
+          <FactList items={t.creds} />
+        </section>
+        <section>
+          <SubTitle>{t.playingTitle}</SubTitle>
+          <FactList items={t.playing} />
+        </section>
+      </div>
     </div>
+  );
+}
+
+/** Marked list shared by the qualification and playing-career blocks. */
+function FactList({ items }: { items: string[] }) {
+  return (
+    <ul className="m-0 list-none p-0">
+      {items.map((item, i) => (
+        <li key={item}>
+          <Reveal
+            index={i}
+            className="flex gap-3.5 border-b border-bone/10 py-4 text-[15.5px] leading-[1.7] text-bone/78"
+          >
+            <span aria-hidden className="mt-2.5 size-1.5 shrink-0 bg-blood" />
+            <span className="text-pretty">{item}</span>
+          </Reveal>
+        </li>
+      ))}
+    </ul>
   );
 }

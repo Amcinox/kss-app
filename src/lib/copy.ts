@@ -16,7 +16,7 @@ export type ScheduleRow = {
   place: string;
 };
 export type Ground = { name: string; addr: string; access: string };
-export type TimelineEntry = { year: string; text: string };
+export type TimelineEntry = { year: string; roles: string[] };
 export type Photo = { src: string; cap: string };
 /** A short training video. `w`/`h` are the source pixels, for the aspect ratio. */
 export type Clip = {
@@ -60,11 +60,16 @@ export type Copy = {
   coachIntro: string;
   coachBio1: string;
   coachBio2: string;
+  coachBio3: string;
   coachQuote: string;
   philosophyTitle: string;
   philosophy: Pillar[];
   pathTitle: string;
   timeline: TimelineEntry[];
+  credsTitle: string;
+  creds: string[];
+  playingTitle: string;
+  playing: string[];
   galleryKicker: string;
   galleryTitle: string;
   galleryIntro: string;
@@ -282,12 +287,14 @@ export const COPY: Record<Lang, Copy> = {
     coachKicker: "コーチ紹介",
     coachName: "「Kobi」シャリフ・アブデルカビル",
     coachIntro:
-      "モロッコ出身。2024年5月に淡路島で KOBI SOCCER SCHOOL を立ち上げ、すべての練習を自身で担当しています。",
+      "モロッコ出身、兵庫県淡路島を拠点に活動するサッカーコーチ。モロッコの創造性と日本の規律を融合した指導で、2024年から KOBI SOCCER SCHOOL のすべての練習を自身で担当しています。",
     coachBio1:
-      "モロッコで育ち、日本で指導者としてのキャリアを重ねてきました。スポーツアカデミーで Head of Soccer を務め、中学校サッカーの指導も経験しています。2024年5月、淡路島で KOBI SOCCER SCHOOL を開校しました。",
+      "モロッコ出身、兵庫県淡路島を拠点に活動するサッカーコーチです。モロッコで培った創造性や自由な発想と、日本で学んだ規律や細部へのこだわりを融合した指導を大切にしています。",
     coachBio2:
-      "JFA B級コーチライセンス、PFSA Opposition Analysis レベル1・2、FIFA セーフガーディングを修了。学び続けながら、将来的には JFA A級ライセンスの取得と、さらに高いレベルでの指導を目指しています。",
-    coachQuote: "「どうやるか」の前に、「いつ、なぜ、それを使うのか」。",
+      "育成年代では、技術だけでなく、選手自身が観て、考え、判断し、表現する力を伸ばすことを重視しています。",
+    coachBio3:
+      "また、現代サッカーの戦術、ゲームモデル、対戦分析、トレーニング方法論に強い関心を持ち、日々学びながら指導に取り入れています。一人ひとりの個性と強みを伸ばし、自立した選手を育てることを目指しています。",
+    coachQuote: "モロッコの創造性 × 日本の規律",
     philosophyTitle: "スクールの考え方",
     philosophy: [
       {
@@ -311,24 +318,34 @@ export const COPY: Record<Lang, Copy> = {
         d: "ミスは選手とコーチにとっての情報です。結果だけでなく、観察・勇気ある判断・良いタイミング・努力を評価します。",
       },
     ],
-    pathTitle: "経歴と資格",
+    pathTitle: "指導歴",
     timeline: [
       {
-        year: "2024.05",
-        text: "淡路島で KOBI SOCCER SCHOOL を開校。すべての練習をコーチ本人が担当しています。",
+        year: "2023〜",
+        roles: [
+          "PA Awajishima U12 ／ U10 ／ U8 ヘッドコーチ",
+          "AIE国際高等学校サッカー部 アシスタントコーチ・英語教師",
+        ],
       },
+      { year: "2024〜", roles: ["KOBI SOCCER SCHOOL 代表"] },
       {
-        year: "指導歴",
-        text: "スポーツアカデミーでの Head of Soccer、中学校サッカーの指導を経験。",
+        year: "2026〜",
+        roles: ["Pasona Sports Academy ／ AWAJI CITY FC ヘッドコーチ"],
       },
-      {
-        year: "資格",
-        text: "JFA B級コーチライセンス ／ PFSA Opposition Analysis レベル1・2 ／ FIFA セーフガーディング修了。",
-      },
-      {
-        year: "これから",
-        text: "JFA A級ライセンスの取得と、さらに高いレベルでの指導を目指しています。",
-      },
+    ],
+    credsTitle: "資格",
+    creds: [
+      "JFA公認 B級コーチライセンス",
+      "PFSA 対戦分析資格 Level 1 & 2",
+      "ISSPF サッカー指導・ピリオダイゼーション・ゲームモデル基礎資格",
+      "FIFA セーフガーディング資格",
+    ],
+    playingTitle: "選手歴",
+    playing: [
+      "Olympique Dcheira ジュニア（モロッコ）",
+      "AUFI ジュニアユース（モロッコ）",
+      "AUFI ユース（モロッコ）",
+      "イブン・ゾフル大学（アガディール・モロッコ）",
     ],
     galleryKicker: "練習風景",
     galleryTitle: "ギャラリー",
@@ -578,12 +595,14 @@ export const COPY: Record<Lang, Copy> = {
     coachKicker: "The coach",
     coachName: "Kobi — Charif Abdelkabir",
     coachIntro:
-      "Moroccan-born, and the founder of KOBI Soccer School on Awaji Island since May 2024. He runs every session himself.",
+      "A Moroccan coach based on Awaji Island, Hyogo, blending Moroccan creativity with Japanese discipline. He has coached every KOBI session himself since 2024.",
     coachBio1:
-      "Kobi grew up in Morocco and built his coaching career in Japan. He has worked as Head of Soccer at a sports academy and coached junior-high-school football, before opening KOBI Soccer School on Awaji Island in May 2024.",
+      "Coach Kobi is a Moroccan soccer coach based on Awaji Island, Hyogo. His approach combines the creativity and freedom of Moroccan soccer with the discipline and attention to detail of the Japanese game.",
     coachBio2:
-      "He holds the JFA B coaching licence, PFSA Opposition Analysis Levels 1 and 2, and FIFA Safeguarding certification. He continues to study, with the JFA A licence and coaching at a higher level as his long-term goal.",
-    coachQuote: "Before how — when, where, and why.",
+      "Through the development years he focuses on players who can see, think, decide and express themselves on the field — not on technique alone.",
+    coachBio3:
+      "He is deeply interested in modern tactics, game models, opposition analysis and training methodology, and keeps studying the game to bring what he learns into his sessions. The aim is confident, intelligent, independent players.",
+    coachQuote: "Moroccan creativity × Japanese discipline",
     philosophyTitle: "How we work",
     philosophy: [
       {
@@ -607,24 +626,34 @@ export const COPY: Record<Lang, Copy> = {
         d: "Mistakes are information, for the player and the coach. We praise observation, brave decisions, good timing and effort — not only the outcome.",
       },
     ],
-    pathTitle: "Background & qualifications",
+    pathTitle: "Coaching career",
     timeline: [
       {
-        year: "2024.05",
-        text: "Founded KOBI Soccer School on Awaji Island. Every session is coached by Kobi himself.",
+        year: "2023–",
+        roles: [
+          "Head coach, PA Awajishima U12 / U10 / U8",
+          "Assistant coach and English teacher, AIE International High School soccer club",
+        ],
       },
+      { year: "2024–", roles: ["Founder, KOBI Soccer School"] },
       {
-        year: "Experience",
-        text: "Head of Soccer at a sports academy; junior-high-school football coaching.",
+        year: "2026–",
+        roles: ["Head coach, Pasona Sports Academy / AWAJI CITY FC"],
       },
-      {
-        year: "Licences",
-        text: "JFA B coaching licence · PFSA Opposition Analysis Levels 1 & 2 · FIFA Safeguarding.",
-      },
-      {
-        year: "Next",
-        text: "Working towards the JFA A licence and coaching at a higher level.",
-      },
+    ],
+    credsTitle: "Qualifications",
+    creds: [
+      "JFA B Coaching Licence",
+      "PFSA Opposition Analysis Level 1 & 2",
+      "Foundation Certificate in Soccer Coaching, Periodisation and Game Model Development",
+      "FIFA Safeguarding",
+    ],
+    playingTitle: "Playing career",
+    playing: [
+      "Olympique Dcheira Junior (Morocco)",
+      "AUFI Junior Youth (Morocco)",
+      "AUFI Youth (Morocco)",
+      "Ibn Zohr University, Agadir (Morocco)",
     ],
     galleryKicker: "Inside a session",
     galleryTitle: "Training gallery",
